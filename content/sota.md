@@ -1,6 +1,17 @@
 ## State of the art
 {:#sota}
 
+[Triple Pattern Fragments](cite:cites verborgh_jws_2016) proposed to limit the server’s capabilities to only answering triple patterns, the most basic question you can ask to an RDF triple store.
+
+<figure id="url-pattern-2" class="listing"  markdown="block">
+```
+https://your-domain/your/dataset{?subject,predicate,object}
+```
+<figcaption markdown="block">
+The resource structure proposed by Triple Pattern Fragments
+</figcaption>
+</figure>
+
 The Linked Data Fragments axis ...
 One of the first specifications in that realm was the Triple Pattern Fragments specification.
 It was built from the perspective of building an interface that allows
