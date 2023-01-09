@@ -1,22 +1,22 @@
 ## Abstract
 <!-- Context      -->
-Ever since the Web was introduced to access representations of resources via URLs, Web developers have been coming up with ways to make data more queryable via more complex URL patterns.
+Ever since the Web was introduced to access representations of resources via URLs, Web developers have been coming up with ways to make available more specific HTTP responses via more complex URL patterns.
 <!-- Need         -->
-URL patterns with features such as the SPARQL query language, GraphQL, OGC Web Feature Services, or free text queries, also come with drawbacks:
-i) you only query the data integrated on the machine you query,
+Complex URL patterns with features such as the SPARQL query language, GraphQL, OGC Web Feature Services, or free text queries, also come with limitations:
+i) you can only query the data integrated on the machine you query,
 ii) coding against a fixed protocol lowers potential evolvability,
 iii) relying on dynamic server functionality raises challenges in long-term preservation, and
 iv) sending the full query to a third party server lowers query privacy.
 <!-- Task         -->
 Linked Data Fragments puts forward the idea that there is a false dichotomy between solving the full query on the server of the data publisher and solving it fully on the infrastructure of the consumers:
-when publishing data in fragments of triples in a dataset with a certain locality into an interlinked resource-structure, data consumers can speed up their own query processing by leveraging the locality of reference principle.
-Linked Data Event Streams extends upon these ideas and proposes a priority shield for what fragmentations should be built first: i) a fragmentation that makes replication and synchronization efficient for other actors to build their own views, ii) fragmentations of such an event stream according, and iii) querying protocols.
+when publishing data in fragments of triples in a dataset with a certain locality into an interlinked resource-structure, data consumers can speed up their own query processing.
+<!--Linked Data Event Streams extends upon these ideas and proposes a priority shield for what fragmentations should be built first: i) a fragmentation that makes replication and synchronization efficient for other actors to build their own views, ii) fragmentations of such an event stream according, and iii) querying protocols.-->
 <!-- Object       -->
-In this paper, we build evolvable and preservable Web APIs using “materializable interfaces”.
+In this paper, we build evolvable and preservable Web APIs using “materializable interfaces” with the TREE hypermedia specification.
 <!-- Findings     -->
 For use cases such as route planning, full-text search, geospatial look-ups or replication and synchronization, we show how to build a fragmentation using the TREE hypermedia specifications that can qualify the relation from one fragment to another.
 <!-- Conclusion   -->
-This way, the TREE hypermedia specification enables to overcome the four drawbacks of URL-based query protocols.
+This way, the TREE hypermedia specification helps to overcome the four drawbacks of URL-based query protocols.
 <!-- Perspectives -->
 The specification will be further developed as part of a W3C community group for which we are now seeking support.
 

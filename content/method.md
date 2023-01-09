@@ -9,7 +9,7 @@ Instead we aimed to have a set of building blocks that can be used to fulfill va
 If they can work interchangeably, we have succeeded in creating both _reusable code_ across different Web APIs, and well as creating _evolvable_ APIs.
 
 The TREE specification started from heterogeneous use cases that could benefit from such evolvability and code reuse.
-The use cases we worked with included querying for geospatial relations, time schedules of public transit data, time series, OpenStreetMap’s road network and taxonomies with text literals such as an address database, geonames, OpenStreetMap names or Wikidata entities.
+The use cases we worked with included querying for geospatial relations, time schedules of public transit data, time series, OpenStreetMap’s road network and taxonomie swith text literals such as an address database, geonames, OpenStreetMap names or Wikidata entities.
 In the rest of this chapter we shortly introduce some published use cases (as of January 2023) that use the `tree:Relations` for a specific group of features.
 
  1. __Replicating and synchronizing dataset copies across organizations__<br/>
