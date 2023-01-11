@@ -40,4 +40,4 @@ The public transit data also needs a road network to potentially calculate walks
 Mutatis mutandis for [substring autocompletion](cite:cites dedecker2021file): the locality is now not based on geospatial or time-based literals, but on the basis of substring matches with a string literal. Similar benefits can be found.
 
 All these interfaces can be kept in-sync thanks to the event source, but also need to be able to describe how they are derived from which sources.
-The result of a workflow over [semantically describe streams can already be described with the Smart Data Specification](cite:cites vercruysse2022describing) combining LDES, DCAT, SHACL, PROV-O and P-Plan.
+The result of a workflow over [semantically describe streams can already be described](cite:cites vercruysse2022describing, guasch2022semantic) by combining LDES, DCAT, SHACL, PROV-O and P-Plan.
