@@ -14,7 +14,7 @@ when publishing data in fragments of triples in a dataset with a certain localit
 <!-- Object       -->
 In this paper, we build evolvable and preservable Web APIs using “materializable interfaces” with the TREE hypermedia specification.
 <!-- Findings     -->
-For use cases such as route planning, full-text search, geospatial look-ups or replication and synchronization, we show how to build a fragmentation using the TREE hypermedia specifications that can qualify the relation from one fragment to another.
+For use cases such as route planning, full-text search, geospatial look-ups or replication and synchronization, we show how to build a fragmentation by qualifying the relation from one fragment to another.
 <!-- Conclusion   -->
 This way, the TREE hypermedia specification helps to overcome the four drawbacks of URL-based query protocols.
 <!-- Perspectives -->

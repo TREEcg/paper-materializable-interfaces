@@ -10,11 +10,16 @@ When a user agent performs the query processing, it can execute the queries usin
  2. __Archivable__<br/>
 Materializable means everything can be generated in files without the need for dynamic server functionality.
  3. __Evolvable__<br/>
-A client is always going to start from a root node.
- 4. __Query privacy__:
+A user agent is going to start from an entry pointt node, and will be able to 
+ 4. __More query privacy__<br/>
 The only thing a server sees is that a client is interested in a certain part of its dataset.
+
+## Future work
+{:#future-work}
 
 The current version of the TREE vocabulary has been submitted to [LOV](cite:cites lov).
 In order to further evolve the specification, we are now starting a TREE/LDES community group at W3C.
 
-We will also need workflows. What to use exactly is... but the result and the provenance can be described using DCAT, SHACL, PROV-O , P-Plan, SDS (cite!), etc. Data privacy DPV, access control, etc.
+The last information on the TREE hypermedia project can be found at https://tree.linkeddatafragments.org.
+In future work, we are also going to tackle graph-based and time series fragmentations with the TREE/LDES method.
+Furthermore, the [Comunica Querying engine](cite:cites taelman_iswc_resources_comunica_2018) is being extended with a TREE hypermedia querying actor that does query planning across multiple hypermedia interfaces.
