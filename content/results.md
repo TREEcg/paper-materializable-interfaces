@@ -47,15 +47,16 @@ This is explored in the next subsection on traversing the hypermedia structure.
 We always write TREE with all caps to indicate we take inspiration from traversing search trees, but we cannot guarantee, and do not limit the TREE hypermedia specification to designing search trees.
 Even however we would limit it to search trees, counting on the fact that server would not provide you circular references would be incredibly naive.
 Therefore, a TREE user agent must always keep a history of nodes it already traversed, and _prune_ these nodes from its yet-to-be-visited queue.
+Visited nodes may be readded to the queue if the user agent implements a cache invalidation strategy.
 
 The `tree:Node` describing the current page is linked with the property `tree:relation` to an entity that is an instance of a subclass of a `tree:Relation`.
 For example, for string search, we have defined the type `tree:SubstringRelation`.
 A `tree:value` property on top of that relation defines the value to be used in a comparison function defined by the relation, to compare the needs of the user agent with the intention of the relation.
-The `tree:path` describes the property path (using the [Shapes Constraints Language (SHACL) Property Paths specification](https://www.w3.org/TR/shacl/#x2.3.1-shacl-property-paths)) on which this `tree:value` applies.
+The `tree:path` describes the property path (using the [Shapes Constraints Language (SHACL) Property Paths specification](https://www.w3.org/TR/shacl/#x2.3.1-shacl-property-paths)) to be resolved starting from a member, on which this `tree:value` applies.
 Mind that a certain `tree:Node` can occur multiple times across relations, and that this must be interpretted as a logical AND.
 A code example of a relation can be found in [](#TREE-code-sample).
 
-Given the list of nodes linked from the pages a user agent already visited, minus these nodes it already visited, it can prune that list further based on the constraints given to the task at hand (e.g., find all members starting with labels starting with the letters `Ghent`). 
+Given the list of nodes linked from the pages a user agent already visited, minus these nodes it already visited, it can prune that list further based on the constraints given to the task at hand (e.g., find all members starting with labels starting with the letters `Ghent`).
 
 <figure id="TREE-code-sample" class="listing" markdown="block">
 <pre><code>
