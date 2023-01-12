@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title property="foaf:name schema:name">Building materializable querying interfaces with the TREE hypermedia specification</title>
+  <link rel="stylesheet" media="screen" href="styles/screen.css" />
+  <link rel="stylesheet" media="print"  href="styles/print.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="citation_title" content="Building materializable querying interfaces with the TREE hypermedia specification">
+  <meta name="citation_author" content="Pieter Colpaert" />
+  
+  <meta name="citation_publication_date" content="2023/01/12" />
+</head>
+
+<body prefix="dctypes: http://purl.org/dc/dcmitype/ pimspace: http://www.w3.org/ns/pim/space# rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ solid: http://www.w3.org/ns/solid/terms# acl: http://www.w3.org/ns/auth/acl# dio: https://w3id.org/dio# lsc: http://linkedscience.org/lsc/ns#" typeof="schema:CreativeWork sioc:Post prov:Entity lsc:Research">
+  <header>
+  <h1 id="building-materializable-querying-interfaces-with-the-tree-hypermedia-specification">Building materializable querying interfaces with the TREE hypermedia specification</h1>
+
+  <ul id="authors">
+    <li><a rev="lsc:participatesIn" property="foaf:maker schema:creator schema:author schema:publisher" href="https://pietercolpaert.be/" typeof="foaf:Person schema:Person" resource="https://pietercolpaert.be/#me">Pieter Colpaert</a></li>
+  </ul>
+
+  <ul id="affiliations">
+    <li id="idlab">IDLab,
+          Department of Electronics and Information Systems,
+          Ghent University – imec</li>
+  </ul>
+
+  <section class="context">
+    <h2 id="in-reply-to">In reply to</h2>
+    <ul>
+      <li><a href="https://mepdaw-ws.github.io/2022/" rel="as:inReplyTo">MEPDAW2022 (invited talk)</a></li>
+    </ul>
+  </section>
+
+  <section id="abstract" inlist="" rel="schema:hasPart" resource="#abstract">
+<div datatype="rdf:HTML" property="schema:description">
+      <h2 property="schema:name">Abstract</h2>
+      <!-- Context      -->
+      <p>Ever since the Web was introduced to access representations of resources via URLs, Web developers have been coming up with ways to make available more specific HTTP responses via more complex URL patterns.
+<!-- Need         -->
+Complex URL patterns with features such as the SPARQL query language, GraphQL, OGC Web Feature Services, or free text queries, also come with limitations:
+i) you can only query the data integrated on the machine you query,
+ii) coding against a fixed protocol lowers potential evolvability,
+iii) relying on dynamic server functionality raises challenges in long-term preservation, and
+iv) sending the full query to a third party server lowers query privacy.
+<!-- Task         -->
+Linked Data Fragments puts forward the idea that there is a false dichotomy between solving the full query on the server of the data publisher and solving it fully on the infrastructure of the consumers:
+when publishing data in fragments of triples in a dataset with a certain locality into an interlinked resource-structure, data consumers can speed up their own query processing.
+<!--Linked Data Event Streams extends upon these ideas and proposes a priority shield for what fragmentations should be built first: i) a fragmentation that makes replication and synchronization efficient for other actors to build their own views, ii) fragmentations of such an event stream according, and iii) querying protocols.-->
+<!-- Object       -->
+In this paper, we build evolvable and preservable Web APIs using “materializable interfaces” with the TREE hypermedia specification.
+<!-- Findings     -->
+For use cases such as route planning, full-text search, geospatial look-ups or replication and synchronization, we show how to build a fragmentation by qualifying the relation from one fragment to another.
+<!-- Conclusion   -->
+This way, the TREE hypermedia specification helps to overcome the four drawbacks of URL-based query protocols.
+<!-- Perspectives -->
+The specification will be further developed as part of a W3C community group for which we are now seeking support.</p>
+
+      <!--
+Future work
+ → W3C community group around this: please support
+ → Comunica support, etc.
+-->
+
+      <!--Important note: by design we chose not to annotate triples. We believe we should always publish members in a collection described by triples.
+
+I’m more and more starting to be convinced that we should never publish just “triples”, but that we should publish members of a collection described using triples. I’ve always struggled with how to position Triple Pattern Fragments and the likes properly in a data architecture, and how to describe what happens to your data when you fragment your data according to TPF. With TPF you think from the perspective of a query agent → I want to resolve this query pattern, so the server should give me these controls. You’re not
+-->
+
+    </div>
+</section>
+
+  <section>
+<div datatype="rdf:HTML" property="schema:description">
+      <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTZIHQyDDVOtPew4aSb-ST_heukbVDzSGCAT-7neLsTu-ZS5wLTmtlmAW4iriyq4jO1cLhc4b5VvOu9/embed?start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="100%" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+    </div>
+</section>
+
+</header>
+
+<main>
+  <!-- Add sections by specifying their file name, excluding the '.md' suffix. -->
+  <section id="introduction" inlist="" rel="schema:hasPart" resource="#introduction">
+<div datatype="rdf:HTML" property="schema:description">
+      <h2 property="schema:name">Introduction</h2>
+
+      <p>The Web is a global information system that makes representations of resources addressable using URLs.
+While the most visible use case to end-users is using URLs to address websites and their pages in their browser, developers also use exactly the same technique in what they call Web APIs to share data between user agents.
+Just like a website, not all content or data that is managed through one server is exposed via only one resource.
+Instead, a Web API is a resource structure that exposes one or more views over the collection of data.</p>
+
+      <figure id="url-pattern" class="listing">
+        <p><code>
+https://your-domain/your/resource/structure{?parameters}
+</code></p>
+        <figcaption>
+          <p><span class="label">Listing 1:</span> Organizations build their own resource structure based on protocols they want to follow.</p>
+        </figcaption>
+      </figure>
+
+      <p>Depending on how tightly coupled the user-agent application and the Web API are, designing the resource structure of the Web API becomes more or less straightforward.
+I.e. if there is only one app that needs the data the API exposes, and both are controlled by the same developer, the resource structure can be driven by exactly the user stories of the app itself.
+However, if an unknown number of potential systems need to be able to reuse the data, such as it is the case when designing APIs for Open Data publishing, or resource structures within <a href="https://solidproject.org/">the Solid project</a>, it becomes guess-work on what API will work best. <!-- REREAD THIS POINT: does it make clear that the use cases here is using servers that you don’t control, so that need a fixed spec you can use? --></p>
+
+      <p><span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/doi:10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">The Linked Data Fragments (LDF) axis</a></span> <span class="references">[<a href="#ref-1">1</a>]</span> for building Web APIs describes two extremes: i) either the user agent downloads the full dataset and performs all processing on their infrastructure, ii) either the server creates an ad-hoc resource that gives precisely the data the user agent wants based on a query that is sent to the server.
+Examples of the latter include the SPARQL protocol for querying RDF data, but equally as well, GraphQL, a full-text search API or a geospatial Web Feature Service (WFS) would be good examples.
+These specifications allow almost any flexibility to be given to the user agent developer to formulate any possible query.
+However, creating ad-hoc resources answering the full query on a server poses four important limitations:</p>
+
+      <ol>
+        <li><strong>You are querying a closed world</strong><br />
+You only query the data integrated on the machine you query. This will thus not be a good solution for cases in which you do not control the server you want to query: it could not have the features or data you need for your use case.</li>
+        <li><strong>It is challenging to archive</strong><br />
+ Relying on dynamic server functionality raises challenges in long-term preservation.
+ When the amount of different queries you can ask the server is infinite, what queries will you archive?</li>
+        <li><strong>It is difficult to turn off or evolve an API once it has been made available</strong><br />
+ Coding against a purpose-built protocol lowers the potential evolvability of that API.
+ Turning off this API in favour of a different specific Web API with ad-hoc resources built based on a specific language will require applications to be recoded towards that novel specification.</li>
+        <li><strong>It leaks query privacy</strong><br />
+Sending the full query to a third party server shares the full questions your users are interested in to that server.</li>
+      </ol>
+
+      <p>These two extremes are positioned as a false dichotomy by LDF.
+If the user agent and the initial server can take up more responsibility in the query processing, then more options come to exist.
+A dataset that is too big for one page can be <em>fragmented</em> according to a certain property in the data, and therefore, by documenting the property, can help the user agent in pruning what fragments it needs to download in order to answer a certain query.</p>
+
+      <p>The idea is further extended by Linked Data Event Streams (LDES) <span class="references">[<a href="#ref-2">2</a>]</span>.
+LDES further reasons the ideal Web API on top of a dataset does not exist, as any type of fragmentation will introduce bias towards a specific use case.
+Therefore, a dataset will be published through <strong>multiple Web APIs</strong> as illustrated in <a href="#multiple-views">Fig. 1</a>, and not just one, managed by multiple organizations using multiple Web servers.
+LDES continues by then positioning that, if multiple views must become possible, that the first Web API a data publisher should build, is an event source, that focuses on keeping derived Web API in-sync with its authoritative source over the Web.</p>
+
+      <figure id="multiple-views">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRoAoYfTvy7l8EJA7KIZGMCsj8BWgxyqYBgniHqOGNhEowjZb6Br1RSmMyGG0MEjmG7D7zY5D0ZUiNN/pub?w=890&amp;h=311" alt="" />
+<figcaption><span class="label">Fig. 1:</span> The same dataset will be published on the Web using multiple interfaces.</figcaption>
+</figure>
+
+      <p>In this paper, we look into making these event sources and derived Web APIs evolvable and preservable, and mitigate the four limitations mentioned above.
+Even when a service or dataset is decommissioned, user agents that were once built on top of it, will still be able to resolve queries against archived data.
+In <a href="#results">Section 3</a>, we sketch our first steps into designing the TREE specification for guiding user agents through a fragmented dataset.
+In <a href="#method">Section 4</a>, We then show using a couple of examples how to build what we will call <em>materializable</em> Web APIs.
+Finally, in <a href="#conclusion">the Conclusion</a>, we reiterate the limitations and discuss how these materializable Web APIs tackle them.</p>
+
+    </div>
+</section>
+
+  <section id="sota" inlist="" rel="schema:hasPart" resource="#sota">
+<div datatype="rdf:HTML" property="schema:description">
+      <h2 property="schema:name">State of the art</h2>
+
+      <p>Hartig et al. looked into Link Traversal Query Processing by following the HTTP identifiers it encounters in the triples of Linked Data documents <span class="references">[<a href="#ref-3">3</a>]</span>.
+While this works, as also implemented <a href="https://comunica.dev/research/link_traversal/">in Comunica</a> <span class="references">[<a href="#ref-4">4</a>]</span>, it goes too slow for live Web applications in practise, as these data interfaces are not optimized for querying.
+In our work, we will look into more directed link traversal, by making the data publishing include explicit hypermedia controls into their results.</p>
+
+      <!--
+<span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/doi:10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">Triple Pattern Fragments</a></span> <span class="references">\[<a href="#ref-1">1</a>\]</span> proposed to limit the server’s capabilities to only answering triple patterns, the most basic question you can ask to an RDF triple store.
+This translates into a relatively simple URL pattern compared to the full SPARQL query language, as illustrated in [](#url-pattern-2).
+The interesting idea behind this system is that it does not only allow triple patterns to be answered by user agents, but also full Basic Graph Patterns by performing the join on the infrastructure of the user agent.
+The paper showed remarkable results: some SPARQL queries would show the first results even faster than the state of the art in SPARQL endpoints.
+Further work then tried to extend the interface with more dynamic server features, such as [filtering based on substring](van2015substring) or binding restricted triple pattern fragments
+In this paper we instead propose 
+
+<figure markdown="block" class="listing" id="url-pattern-2">
+```
+https://your-domain/your/dataset{?subject,predicate,object}
+```
+<figcaption><span class="label">Listing 2:</span> 
+The resource structure proposed by Triple Pattern Fragments. The page will return the answer to the triple pattern, and hypermedia controls to navigate further through the dataset.
+</figcaption>
+</figure>
+-->
+
+      <p>Hydra <span class="references">[<a href="#ref-5">5</a>]</span> is a domain model introduced in 2013 to bring the power of hypermedia to Linked Data based APIs.
+Other work outside the Linked Data domain, such a <a href="https://apigility.org/documentation/api-primer/halprimer">Hypertext Application Layer (HAL)</a> and <a href="https://jsonapi.org/">json:api</a>, introduced hypermedia specifications to Web APIs already before.
+In all three of these cases, the hypermedia controls that would afford pruning a client’s search space are limited.
+For instance, the nearest concept to the concept of a fragmentation strategy in <a href="http://www.hydra-cg.com/spec/latest/core/">Hydra</a> is the concept of a <a href="http://www.hydra-cg.com/spec/latest/core/#collections">partial collection view</a>.
+This view describes how to get to the first, next, previous or last page.
+Yet, no description is provided on whether or not the view is ordered, and thus, when a smart client would visit the page, it would have to iterate across all pages for any query.</p>
+
+      <p>Another specification that includes hypermedia controls as part of a broaded protocols is <a href="https://www.w3.org/TR/activitystreams-core/">Activity Streams 2.0</a>.
+This specification does allow to indicate pages are ordered, yet the description of the ordering itself is left out of scope.
+<a href="https://www.w3.org/TR/ldp/">Linked Data Platform (LDP)</a> is a World Wide Web (W3C) specification that also puts forward a pagination specification.
+<a property="schema:citation http://purl.org/spar/cito/cites" href="https://pdfs.semanticscholar.org/4e77/37fff638f89260286d5dbe1a1adf0fc17cc7.pdf">Despite its conflicts with Hydra and Activity Streams 2.0</a> <span class="references">[<a href="#ref-6">6</a>]</span>, it does put forward a way to describe how a collection is ordered.
+It is the only example in the state of the art we found so far that could allow clients to effectively prune their search space to some extent. We did however not find any evidence of clients taking advantage of this specific feature.</p>
+
+      <p>In order to enable clients to prune their search space based on hypermedia descriptions beyond simple pagination, we need to come up with a comprehensible specification, as well as describe the client-side algorithm.
+An early attempt at making a client detect automatically how to navigate further through a list or things in an ordinal range was with the multidimensional interface specification <span class="references">[<a href="#ref-7">7</a>]</span>.</p>
+
+      <p>In contrast to the state of the art, we want the specification to describe precisely how the index works, so any client-side query algorithm can benefit without a human developer having to explain how to interpret the responses.</p>
+
+    </div>
+</section>
+
+  <section id="results" inlist="" rel="schema:hasPart" resource="#results">
+<div datatype="rdf:HTML" property="schema:description">
+      <h2 property="schema:name">The TREE specification</h2>
+
+      <p>We introduce the TREE hypermedia specification to fragment a collection of members in more interesting ways than only simple pagination.
+It allows to qualify relations from the current <code>tree:Node</code>—a page or fragment that can be requested using HTTP GET—to multiple other pages, similar to search trees. 
+The description allows for a user agent to understand that, when following the link, all members of the collection from that page on will respect a certain condition, such as the fact that the name contains a certain prefix, a value from a literal will be greater or less than a certain value, or is contained in a certain geospatial area.
+The full specification can be found in the <a href="https://w3id.org/tree/specification">TREE specification</a>.
+A concise overview of the specification is depicted in <a href="#treespec">Fig. 2</a>.</p>
+
+      <figure id="treespec">
+<div style="width:100%; text-align:center">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vR-iK_9kBzQXmaiUIo8U_jtBShONtD9PZlYlSyL9d3PfedqzJ_u1cXg9l_fKoK30dnLoBhFnagSOBkB/pub?w=1054&amp;h=632" alt="The TREE specification" style="width: 100%" />
+</div>
+<figcaption>
+          <p><span class="label">Fig. 2:</span> TREE is a specification to qualify the relation between two pages. It is able to describe to a client whether following a certain page will not be interesting for its current query, and thus whether the client’s search space can be pruned.</p>
+        </figcaption>
+</figure>
+
+      <h3 id="collection-design">Collection design</h3>
+
+      <p>The core collection design is largely inspired by and in line with Hydra.
+An instance of a <code>tree:Collection</code> links using the <code>tree:member</code> to the entities it contains.</p>
+
+      <p>As a collection will grow too large for one page, a predicate needs to indicate the current page is a subset of the collection, and only one way through which the collection can be viewed.
+When all members starting from this <code>tree:Node</code> can be found, the property <code>tree:view</code> can be used, meaning this node can be a starting point for <em>viewing</em> all members of the collection.
+Otherwise, if not all members can be found from that <code>tree:Node</code>, but if this node also contains a subset of the members in the collection, the property <code>void:subset</code> can be used.</p>
+
+      <h3 id="discovery">Discovery</h3>
+
+      <p>A <code>tree:Collection</code> is a subclass of a <code>dcat:Dataset</code>.
+The specialization being that it adheres to this collection design.
+When a <code>tree:Collection</code> is an ever-growing append-only collection of immutable members, it must be typed using the subclass <code>ldes:EventStream</code>.
+A <code>tree:Collection</code>, and its subclasses, should define what their members look like using a <a href="https://www.w3.org/TR/shacl/">SHACL shape</a>.
+This SHACL shape may prove useful when selecting datasets from a DCAT catalog, also called <em>dataset discovery</em>.</p>
+
+      <p>However, when there are multiple views defined, a <code>tree:ViewDescription</code> can be defined, which is a subclass of a <code>dcat:DataService</code>.
+The specialization being that it describes a Web API on top of a <code>tree:Collection</code>, publishing all members.
+If the intention of the view is to publish the event source, the sublass <code>ldes:EventSource</code> can be used as a type.
+The type only says something about the intention of the server administrator, and can still contain any kind of structure.
+Through the <code>tree:ViewDescription</code>, a user agent can select the right view for the task it has at hand, also called <em>view discovery</em>.</p>
+
+      <p>The last point in discovery is <em>interface discovery</em> to discover the next links to follow from within the view itself.
+This is explored in the next subsection on traversing the hypermedia structure.</p>
+
+      <h3 id="tree-traversal">TREE traversal</h3>
+
+      <p>We always write TREE with all caps to indicate we take inspiration from traversing search trees, but we cannot guarantee, and do not limit the TREE hypermedia specification to designing search trees.
+Even however we would limit it to search trees, counting on the fact that server would not provide you circular references would be incredibly naive.
+Therefore, a TREE user agent must always keep a history of nodes it already traversed, and <em>prune</em> these nodes from its yet-to-be-visited queue.
+Visited nodes may be readded to the queue if the user agent implements a cache invalidation strategy.</p>
+
+      <p>The <code>tree:Node</code> describing the current page is linked with the property <code>tree:relation</code> to an entity that is an instance of a subclass of a <code>tree:Relation</code>.
+For example, for string search, we have defined the type <code>tree:SubstringRelation</code>.
+A <code>tree:value</code> property on top of that relation defines the value to be used in a comparison function defined by the relation, to compare the needs of the user agent with the intention of the relation.
+The <code>tree:path</code> describes the property path (using the <a href="https://www.w3.org/TR/shacl/#x2.3.1-shacl-property-paths">Shapes Constraints Language (SHACL) Property Paths specification</a>) to be resolved starting from a member, on which this <code>tree:value</code> applies.
+Mind that a certain <code>tree:Node</code> can occur multiple times across relations, and that this must be interpretted as a logical AND.
+A code example of a relation can be found in <a href="#TREE-code-sample">Listing 3</a>.</p>
+
+      <p>Given the list of nodes linked from the pages a user agent already visited, minus these nodes it already visited, it can prune that list further based on the constraints given to the task at hand (e.g., find all members starting with labels starting with the letters <code>Ghent</code>).</p>
+
+      <figure id="TREE-code-sample" class="listing">
+        <pre><code>
+@prefix tree: &lt;https://w3id.org/tree#&gt;.
+@prefix ex: &lt;http://example.org/&gt;.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.
+@prefix sosa: &lt;http://www.w3.org/ns/sosa/&gt;.
+
+ex:C a tree:Collection ;
+    tree:view ex:ThisPage .
+
+ex:ThisPage a tree:Node ;
+    tree:relation ex:Relation1 .
+
+ex:Relation1 a tree:GreaterThanRelation ;
+    tree:node ex:NextPage ;
+    tree:value "5.1234"^^xsd:double ;
+    tree:path (sosa:simpleResult) .
+</code></pre>
+        <figcaption>
+          <p><span class="label">Listing 3:</span> A Turtle example of an <code>ex:ThisPage</code> that links to a <code>ex:NextPage</code> through a GreaterThanRelation. A client can assume it must follow the page if its task needs members with a <code>sosa:simpleResult</code> greater than <code>5.1234</code>, to be compared using the double datatype.</p>
+        </figcaption>
+      </figure>
+
+    </div>
+</section>
+
+  <section id="method" inlist="" rel="schema:hasPart" resource="#method">
+<div datatype="rdf:HTML" property="schema:description">
+      <h2 property="schema:name">Building materializable interfaces</h2>
+
+      <p>The TREE specification allows publishers to construct their own <strong>materializable hypermedia interfaces</strong>.
+We define <em>a materializable interface</em> as an interface that has a finite set of URLs that provide an answer.
+That way, the interface can be published using a simple file host, but is also very efficient to be hosted through a content delivery network, even if the server itself is built in a dynamic way in which each GET request on a URL potentially triggers a script to be executed.</p>
+
+      <p>The strategies in which a dataset can be fragmented is infinite, similar to the amount of indexes one can make on top of a relational database.
+One method of thinking about a fragmentation strategy, is <strong>to only fragment a dataset from the moment a dataset becomes too large for one page.</strong>
+The way in which a second page will be added can then be decided based on the needs in the ecosystem.
+As illustrated in <a href="#multiple-views-2">Fig. 3</a>, the first priority should be to build the relation to the second page based on how the dataset is growing.
+That way, that fragmentation can be efficiently used for populating other Web APIs on top of that dataset.
+However, when the event source is available, we can optionally support more functionality on top of the dataset</p>
+
+      <figure id="multiple-views-2">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vRALczK4l21HiH9OJxVPiosoCZqFGlEJ5JFV442OLTzNgEefWwgP1m10AQ17UikF1nd7JmNf4p7z9_Z/pub?w=884&amp;h=296" />
+<figcaption><span class="label">Fig. 3:</span> 
+A space of materializable interfaces on top of Linked Data interfaces can be queried from the user agents.
+</figcaption>
+</figure>
+
+      <p>The use cases we worked with included querying for geospatial relations, time schedules of public transit data, OpenStreetMap’s road network and taxonomies with text literals such as an address database, geonames, OpenStreetMap names or Wikidata entities.
+These cases have been published in their respective papers, for which we provide a concise overview below (as of January 2023).
+These use cases describe their search space <code>tree:Relation</code> objects.</p>
+
+      <ol>
+        <li><strong>Replicating and synchronizing dataset copies across organizations</strong><br />
+A one dimensional pagination of an ever-growing collection of immutable events has interesting caching properties.
+Only one page remains to be polled, while all other pages are historic and can be flagged with the <code>cache-control: immutable</code> response header.
+In <span class="references">[<a href="#ref-8">8</a>]</span> this is applied on Marine Regions: a gazetteer of standard marine georeference place names and areas. While different organizations build different views on it, all views only need to poll the last page to keep their views in-sync.
+In <span class="references">[<a href="#ref-2">2</a>]</span> it is applied on top of both base registries of the Flemish government, as well as a sensor observation stream, proving the method is both useful for
+In <span class="references">[<a href="#ref-9">9</a>]</span> it is applied to keep the data from art collections from the city of Ghent in-sync with their digital asset management system and the city’s SPARQL endpoint, through which the history and the current state of the art collections can be queried.
+In a similar way, for more fine-grained access to specific windows in time, a B+-tree like fragmentation can also be designed.</li>
+        <li><strong>Time-based relations for route planning over public transit networks</strong><br />
+Public transit can be modeled as a temporal directed acyclic graph departures and arrivals. With Linked Connections <span class="references">[<a href="#ref-10">10</a>]</span>, we proposed to fragment this long list of connections from one stop to another in time intervals. A public transit route planner can then perform the route planning algorithm on the infrastructure of the user agent, by selecting the right time window and performing the route planning in a streaming manner, downloading more data when needed.</li>
+        <li><strong>Geospatial relations for route planning over road and transit networks</strong><br />
+The route planning use case <span class="references">[<a href="#ref-11">11</a>]</span> illustrates the need for querying with a more open world while retaining query privacy.
+By geospatially fragmenting a road network (such as OpenStreetMap), we can select data with a geospatial locality, and/or public transit with a time and geospatial locality.
+The public transit data also needs a road network to potentially calculate walks to transfer from one public transit stop to another, and maybe that transfer needs to happen according to the potential constraints of the end-user, whether they are pushing a stroller, in a wheelchair, trained athletes, or visually impaired. However, the profile of user does not need to be leaked to a server in order for the route planning result to be calculated.</li>
+        <li><strong>Substring-based relations for autocompletion</strong><br />
+Mutatis mutandis for substring autocompletion <span class="references">[<a href="#ref-12">12</a>]</span>: the locality is now not based on geospatial or time-based literals, but on the basis of substring matches with a string literal. Similar benefits can be found.</li>
+      </ol>
+
+      <p>All these interfaces can be kept in-sync thanks to the event source, but also need to be able to describe how they are derived from which sources.
+The result of a workflow over semantically describe streams can already be described <span class="references">[<a href="#ref-13">13</a>, <a href="#ref-14">14</a>]</span> by combining LDES, DCAT, SHACL, PROV-O and P-Plan.</p>
+
+    </div>
+</section>
+
+  <section id="conclusion" inlist="" rel="schema:hasPart" resource="#conclusion">
+<div datatype="rdf:HTML" property="schema:description">
+      <h2 property="schema:name">Conclusion</h2>
+
+      <p>In this paper, although it was already used in previous academic work, we introduced the TREE hypermedia specification for building materializable interfaces.
+We chose the term <em>materializable</em> as it does not need to be materialized on disk, but it can be as there is only a finite set of HTTP requests that give a result.
+Hosting a materializable interface should be possible with almost neglectible hosting costs.
+The largest costs should come from the computational power needed to create and update a page from an interface.</p>
+
+      <p>This turns the four limitations of more complex query patterns in the introduction into the advantages of materializable interfaces:</p>
+
+      <ol>
+        <li><strong>You can query your end-user’s world</strong><br />
+Materializable interfaces assume user agents take part in the query evaluation.
+That way, it can execute the queries by taking into account data that lives on the user agent’s infrastructure, with access to datasets the end-user has access to. Take for example the use case of route planning: it can take into account their home address, the fact their bike is parked in a certain location, the fact they are in a wheelchair, etc. Personalization can happen without having to build a profile on a remote server.</li>
+        <li><strong>It becomes possible to archive an interface, not just the data</strong><br />
+ When a server is being decomissioned, an archiving project can traverse the hypermedia links until it replicated all pages to an archive server, and keep the files available and discoverable. That way, even after a server or even publisher disappeared, clients that relied on a certain fragmentation for their functionality can keep on working.</li>
+        <li><strong>Evolvability can be realized through discovery on multiple levels</strong><br />
+ Different levels of discoverability could be coded against, that wil come with more <em>evolvability</em>.
+ One idea is to have the start fragment of the specific Web API hardcoded. That way, if the structure of the hypermedia changes, it will always start again from the root of the search space.
+ A higher level of evolvability can be achieved when not the URL of the Web API is hardcoded, but the ones of the dataset and a data catalog. That way, through the data catalog, all Web APIs can be discovered that publish the dataset. If one Web API is decommissioned, the user agent can fall back to another Web API publishing the same data. An even higher level of discovery could yet again be achieved by also implementing discovery on the dataset level, to, through the SHACL shape documented with the <code>tree:Collection</code>, and the provenance information attached to it, select these sources that will return an answer to a question.</li>
+        <li><strong>Queries can be kept private</strong><br />
+The only thing a server sees is that a client is interested in a page of its dataset. It does not see how the query is executed and what the final recommendation or query result provided to the user is. This in stark contrast with Web APIs with URL patterns like <code>https:/​/​your-domain/weather{?long,lat}</code> that would be polled for weather information.</li>
+      </ol>
+
+      <h2 id="future-work">Future work</h2>
+
+      <p>The current version of the TREE vocabulary has been submitted to LOV <span class="references">[<a href="#ref-15">15</a>]</span>.
+In order to further evolve the specification, we are now starting a TREE/LDES community group at W3C for which we are now seeking support.</p>
+
+      <p>The last information on the TREE hypermedia project can be found at <a href="https://tree.linkeddatafragments.org">https:/​/​tree.linkeddatafragments.org</a>.
+In future work, we are also going to tackle graph-based and time series fragmentations with the TREE/LDES method.
+Furthermore, the <a property="schema:citation http://purl.org/spar/cito/cites" href="https://comunica.github.io/Article-ISWC2018-Resource/">Comunica Querying engine</a> <span class="references">[<a href="#ref-4">4</a>]</span> is being extended with a TREE hypermedia querying actor that does query planning across multiple hypermedia interfaces.</p>
+
+    </div>
+</section>
+
+  
+</main>
+
+<footer>
+<section id="acknowledgements" inlist="" rel="schema:hasPart" resource="#acknowledgements">
+<div datatype="rdf:HTML" property="schema:description">
+
+      <h2 property="schema:name">Acknowledgements</h2>
+
+      <p>This work has been support by SolidLab Vlaanderen (Flemish Government, EWI and RRF project V023/10) and the Flemish Smart Data Space (Flemish Government, Digital Flanders and RRF project VV073). The vision on materializable hypermedia interfaces is a result of working with the entire <a href="https://knows.idlab.ugent.be">Knowledge on Web-Scale team at Ghent University</a>.</p>
+
+    </div>
+</section>
+
+<section>
+<h2 id="references">References</h2>
+<dl class="references">
+  <dt id="ref-1">[1]</dt>
+  <dd resource="https://dx.doi.org/doi:10.1016/j.websem.2016.03.003" typeof="schema:Article">Verborgh, R., Vander Sande, M., Hartig, O., Van Herwegen, J., De Vocht, L., De Meester, B., Haesendonck, G., Colpaert, P.: Triple Pattern Fragments: a Low-cost Knowledge Graph Interface for the Web. Journal of Web Semantics. 37–38, 184–206 (2016).</dd>
+  <dt id="ref-2">[2]</dt>
+  <dd resource="#ldes" typeof="schema:Article">Van Lancker, D., Colpaert, P., Delva, H., Van de Vyvere, B., Meléndez, J.R., Dedecker, R., Michiels, P., Buyle, R., De Craene, A., Verborgh, R.: Publishing base registries as linked data event streams. In: International Conference on Web Engineering. pp. 28–36. Springer (2021).</dd>
+  <dt id="ref-3">[3]</dt>
+  <dd resource="#hartig2009executing" typeof="schema:Article">Hartig, O., Bizer, C., Freytag, J.-C.: Executing SPARQL queries over the web of linked data. In: ISWC. pp. 293–309. Springer (2009).</dd>
+  <dt id="ref-4">[4]</dt>
+  <dd resource="https://comunica.github.io/Article-ISWC2018-Resource/" typeof="schema:Article">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web. In: Proceedings of the 17th International Semantic Web Conference (2018).</dd>
+  <dt id="ref-5">[5]</dt>
+  <dd resource="#lanthaler2013creating" typeof="schema:Article">Lanthaler, M.: Creating 3rd generation web APIs with hydra. In: Proceedings of the 22nd International Conference on World Wide Web. pp. 35–38. Citeseer (2013).</dd>
+  <dt id="ref-6">[6]</dt>
+  <dd resource="https://pdfs.semanticscholar.org/4e77/37fff638f89260286d5dbe1a1adf0fc17cc7.pdf" typeof="schema:Article">Mihindukulasooriya, N., Garcıa-Castro, R.: Describing Linked Data Platform Applications with the Hydra Core Vocabulary. In: Proceedings of the Third Workshop on Services and Applications over Linked APIs and Data co-located with the 12th Extended Semantic Web Conference (ESWC 2015) (2015).</dd>
+  <dt id="ref-7">[7]</dt>
+  <dd resource="#mdi" typeof="schema:Article">Taelman, R., Colpaert, P., Verborgh, R., Mannens, E.: Multidimensional interfaces for selecting data within ordinal ranges. In: Proceedings of the 7th International Workshop on Consuming Linked Data co-located with 15th International Semantic Web Conference (ISWC 2015) (2016).</dd>
+  <dt id="ref-8">[8]</dt>
+  <dd resource="#lonneville2021publishing" typeof="schema:Article">Lonneville, B., Delva, H., Portier, M., Van Maldeghem, L., Schepers, L., Bakeev, D., Vanhoorne, B., Tyberghein, L., Colpaert, P.: Publishing the Marine Regions Gazetteer as a Linked Data Event Stream. In: JOWO (2021).</dd>
+  <dt id="ref-9">[9]</dt>
+  <dd resource="#van2022publishing" typeof="schema:Article">Van de Vyvere, B., D’Huynslager, O.V., Atauil, A., Segers, M., Van Campe, L., Vandekeybus, N., Teugels, S., Saenko, A., Pauwels, P.-J., Colpaert, P.: Publishing Cultural Heritage Collections of Ghent with Linked Data Event Streams. In: Research Conference on Metadata and Semantics Research. pp. 357–369. Springer (2022).</dd>
+  <dt id="ref-10">[10]</dt>
+  <dd resource="#rojas2022publishing" typeof="schema:Article">Rojas, J.A., Delva, H., Colpaert, P., Verborgh, R.: Publishing planned, live and historical public transport data on the Web with the Linked Connections framework. Semantic Web. (2022).</dd>
+  <dt id="ref-11">[11]</dt>
+  <dd resource="#delva2019client" typeof="schema:Article">Delva, H., Rojas Melendez, J.A., Abelshausen, B., Colpaert, P., Verborgh, R.: Client-side route planning: preprocessing the OpenStreetMap road network for routable tiles. In: Academic Track, State of the Map 2019. pp. 23–24 (2019).</dd>
+  <dt id="ref-12">[12]</dt>
+  <dd resource="#dedecker2021file" typeof="schema:Article">Dedecker, R., Delva, H., Colpaert, P., Verborgh, R.: A file-based linked data fragments approach to prefix search. In: International Conference on Web Engineering. pp. 53–67. Springer (2021).</dd>
+  <dt id="ref-13">[13]</dt>
+  <dd resource="#vercruysse2022describing" typeof="schema:Article">Vercruysse, A., Min Oo, S., Colpaert, P.: Describing a network of live datasets with the SDS vocabulary. In: MEPDaW2022, Managing the Evolution and Preservation of the Data Web. pp. 1–6 (2022).</dd>
+  <dt id="ref-14">[14]</dt>
+  <dd resource="#guasch2022semantic" typeof="schema:Article">Guasch, C., Lodi, G., Dooren, S.V.: Semantic Knowledge Graphs for Distributed Data Spaces: The Public Procurement Pilot Experience. In: International Semantic Web Conference. pp. 753–769. Springer (2022).</dd>
+  <dt id="ref-15">[15]</dt>
+  <dd resource="#lov" typeof="schema:Article">Vandenbussche, P.-Y., Atemezing, G.A., Poveda-Villalón, M., Vatant, B.: Linked Open Vocabularies (LOV): a gateway to reusable semantic vocabularies on the Web. Semantic Web. 8, 437–452 (2017).</dd>
+</dl>
+</section>
+</footer>
+
+
+
+</body>
+</html>
