@@ -26,12 +26,12 @@ However, creating ad-hoc resources answering the full query on a server poses fo
 
  1. __You are querying a closed world__<br/>
 You only query the data integrated on the machine you query. This will thus not be a good solution for cases in which you do not control the server you want to query: it could not have the features or data you need for your use case.
- 2. __It is difficult to turn off or evolve an API once it has been made available__<br/>
- Coding against a purpose-built protocol lowers the potential evolvability of that API.
- Turning off this API in favour of a different specific Web API with ad-hoc resources built based on a specific language will require applications to be recoded towards that novel specification.
- 3. __It is challenging to archive__<br/>
+ 2. __It is challenging to archive__<br/>
  Relying on dynamic server functionality raises challenges in long-term preservation.
  When the amount of different queries you can ask the server is infinite, what queries will you archive?
+ 3. __It is difficult to turn off or evolve an API once it has been made available__<br/>
+ Coding against a purpose-built protocol lowers the potential evolvability of that API.
+ Turning off this API in favour of a different specific Web API with ad-hoc resources built based on a specific language will require applications to be recoded towards that novel specification.
  4. __It leaks query privacy__<br/>
 Sending the full query to a third party server shares the full questions your users are interested in to that server.
 
