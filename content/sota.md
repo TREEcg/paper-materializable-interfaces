@@ -2,7 +2,7 @@
 {:#sota}
 
 Hartig et al. looked into Link Traversal Query Processing by [following the HTTP identifiers it encounters in the triples of Linked Data documents](cite:cites hartig2009executing).
-While this works, as also implemented [in Comunica](https://comunica.dev/research/link_traversal/) [](cite:cites taelman_iswc_resources_comunica_2018), it goes too slow for live Web applications in practise, as these data interfaces are not optimized for querying.
+While this works, as also implemented [in Comunica](https://comunica.dev/research/link_traversal/) [](cite:cites taelman_iswc_resources_comunica_2018), it goes too slow for live Web applications in practice, as these data interfaces are not optimized for querying.
 In our work, we will look into more directed link traversal, by making the data publishing include explicit hypermedia controls into their results.
 
 <!--
@@ -24,7 +24,7 @@ The resource structure proposed by Triple Pattern Fragments. The page will retur
 -->
 
 [Hydra](cite:cites lanthaler2013creating) is a domain model introduced in 2013 to bring the power of hypermedia to Linked Data based APIs.
-Other work outside the Linked Data domain, such a [Hypertext Application Layer (HAL)](https://apigility.org/documentation/api-primer/halprimer) and [json:api](https://jsonapi.org/), introduced hypermedia specifications to Web APIs already before.
+Other work outside the Linked Data domain, such a [Hypertext Application Layer (HAL)](https://apigility.org/documentation/api-primer/halprimer) and [json:api](https://jsonapi.org/), also introduced hypermedia specifications to Web APIs.
 In all three of these cases, the hypermedia controls that would afford pruning a client’s search space are limited.
 For instance, the nearest concept to the concept of a fragmentation strategy in [Hydra](http://www.hydra-cg.com/spec/latest/core/) is the concept of a [partial collection view](http://www.hydra-cg.com/spec/latest/core/#collections).
 This view describes how to get to the first, next, previous or last page.
@@ -32,7 +32,7 @@ Yet, no description is provided on whether or not the view is ordered, and thus,
 
 Another specification that includes hypermedia controls as part of a broaded protocols is [Activity Streams 2.0](https://www.w3.org/TR/activitystreams-core/).
 This specification does allow to indicate pages are ordered, yet the description of the ordering itself is left out of scope.
-[Linked Data Platform (LDP)](https://www.w3.org/TR/ldp/) is a World Wide Web (W3C) specification that also puts forward a pagination specification.
+[Linked Data Platform (LDP)](https://www.w3.org/TR/ldp/) is a World Wide Web (W3C) specification that in an extension also puts forward a [paging specification](https://www.w3.org/TR/ldp-paging/).
 [Despite its conflicts with Hydra and Activity Streams 2.0](cite:cites mihindukulasooriyadescribing), it does put forward a way to describe how a collection is ordered.
 It is the only example in the state of the art we found so far that could allow clients to effectively prune their search space to some extent. We did however not find any evidence of clients taking advantage of this specific feature.
 

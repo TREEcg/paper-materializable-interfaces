@@ -20,7 +20,7 @@ I.e. if there is only one app that needs the data the API exposes, and both are 
 However, if an unknown number of potential systems need to be able to reuse the data, such as it is the case when designing APIs for Open Data publishing, or resource structures within [the Solid project](https://solidproject.org/), it becomes guess-work on what API will work best. <!-- REREAD THIS POINT: does it make clear that the use cases here is using servers that you don’t control, so that need a fixed spec you can use? -->
 
 [The Linked Data Fragments (LDF) axis](cite:cites verborgh_jws_2016) for building Web APIs describes two extremes: i) either the user agent downloads the full dataset and performs all processing on their infrastructure, ii) either the server creates an ad-hoc resource that gives precisely the data the user agent wants based on a query that is sent to the server.
-Examples of the latter include the SPARQL protocol for querying RDF data, but equally as well, GraphQL, a full-text search API or a geospatial Web Feature Service (WFS) would be good examples.
+Examples of the latter include the SPARQL protocol for querying RDF data, but equally as well, GraphQL, a full-text search API or a geospatial Web Feature Service (WFS).
 These specifications allow almost any flexibility to be given to the user agent developer to formulate any possible query.
 However, creating ad-hoc resources answering the full query on a server poses four important limitations:
 
@@ -42,7 +42,7 @@ A dataset that is too big for one page can be _fragmented_ according to a certai
 The idea is further extended by [Linked Data Event Streams (LDES)](cite:cites ldes).
 LDES further reasons the ideal Web API on top of a dataset does not exist, as any type of fragmentation will introduce bias towards a specific use case.
 Therefore, a dataset will be published through __multiple Web APIs__ as illustrated in [](#multiple-views), and not just one, managed by multiple organizations using multiple Web servers.
-LDES continues by then positioning that, if multiple views must become possible, that the first Web API a data publisher should build, is an event source, that focuses on keeping derived Web API in-sync with its authoritative source over the Web.
+LDES continues by then positioning that, if multiple views must become possible, that the first Web API a data publisher should build, is an event source, that focuses on keeping derived Web APIs in-sync with its authoritative source over the Web.
 
 <figure id="multiple-views">
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vRoAoYfTvy7l8EJA7KIZGMCsj8BWgxyqYBgniHqOGNhEowjZb6Br1RSmMyGG0MEjmG7D7zY5D0ZUiNN/pub?w=890&h=311" alt=""/>
@@ -52,5 +52,5 @@ LDES continues by then positioning that, if multiple views must become possible,
 In this paper, we look into making these event sources and derived Web APIs evolvable and preservable, and mitigate the four limitations mentioned above.
 Even when a service or dataset is decommissioned, user agents that were once built on top of it, will still be able to resolve queries against archived data.
 In [](#results), we sketch our first steps into designing the TREE specification for guiding user agents through a fragmented dataset.
-In [](#method), We then show using a couple of examples how to build what we will call _materializable_ Web APIs.
+In [](#method), we then show using a couple of examples how to build what we will call _materializable_ Web APIs.
 Finally, in [the Conclusion](#conclusion), we reiterate the limitations and discuss how these materializable Web APIs tackle them.

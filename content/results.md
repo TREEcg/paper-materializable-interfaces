@@ -47,7 +47,7 @@ This is explored in the next subsection on traversing the hypermedia structure.
 We always write TREE with all caps to indicate we take inspiration from traversing search trees, but we cannot guarantee, and do not limit the TREE hypermedia specification to designing search trees.
 Even however we would limit it to search trees, counting on the fact that server would not provide you circular references would be incredibly naive.
 Therefore, a TREE user agent must always keep a history of nodes it already traversed, and _prune_ these nodes from its yet-to-be-visited queue.
-Visited nodes may be readded to the queue if the user agent implements a cache invalidation strategy.
+Visited nodes may be added again to the queue if the user agent implements a cache invalidation strategy.
 
 The `tree:Node` describing the current page is linked with the property `tree:relation` to an entity that is an instance of a subclass of a `tree:Relation`.
 For example, for string search, we have defined the type `tree:SubstringRelation`.
