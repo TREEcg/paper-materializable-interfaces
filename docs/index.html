@@ -99,7 +99,7 @@ I.e. if there is only one app that needs the data the API exposes, and both are 
 However, if an unknown number of potential systems need to be able to reuse the data, such as it is the case when designing APIs for Open Data publishing, or resource structures within <a href="https://solidproject.org/">the Solid project</a>, it becomes guess-work on what API will work best. <!-- REREAD THIS POINT: does it make clear that the use cases here is using servers that you don’t control, so that need a fixed spec you can use? --></p>
 
       <p><span property="schema:citation http://purl.org/spar/cito/cites" resource="https://dx.doi.org/doi:10.1016/j.websem.2016.03.003"><a href="http://linkeddatafragments.org/publications/jws2016.pdf">The Linked Data Fragments (LDF) axis</a></span> <span class="references">[<a href="#ref-1">1</a>]</span> for building Web APIs describes two extremes: i) either the user agent downloads the full dataset and performs all processing on their infrastructure, ii) either the server creates an ad-hoc resource that gives precisely the data the user agent wants based on a query that is sent to the server.
-Examples of the latter include the SPARQL protocol for querying RDF data, but equally as well, GraphQL, a full-text search API or a geospatial Web Feature Service (WFS) would be good examples.
+Examples of the latter include the SPARQL protocol for querying RDF data, but equally as well, GraphQL, a full-text search API or a geospatial Web Feature Service (WFS).
 These specifications allow almost any flexibility to be given to the user agent developer to formulate any possible query.
 However, creating ad-hoc resources answering the full query on a server poses four important limitations:</p>
 
@@ -123,7 +123,7 @@ A dataset that is too big for one page can be <em>fragmented</em> according to a
       <p>The idea is further extended by Linked Data Event Streams (LDES) <span class="references">[<a href="#ref-2">2</a>]</span>.
 LDES further reasons the ideal Web API on top of a dataset does not exist, as any type of fragmentation will introduce bias towards a specific use case.
 Therefore, a dataset will be published through <strong>multiple Web APIs</strong> as illustrated in <a href="#multiple-views">Fig. 1</a>, and not just one, managed by multiple organizations using multiple Web servers.
-LDES continues by then positioning that, if multiple views must become possible, that the first Web API a data publisher should build, is an event source, that focuses on keeping derived Web API in-sync with its authoritative source over the Web.</p>
+LDES continues by then positioning that, if multiple views must become possible, that the first Web API a data publisher should build, is an event source, that focuses on keeping derived Web APIs in-sync with its authoritative source over the Web.</p>
 
       <figure id="multiple-views">
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vRoAoYfTvy7l8EJA7KIZGMCsj8BWgxyqYBgniHqOGNhEowjZb6Br1RSmMyGG0MEjmG7D7zY5D0ZUiNN/pub?w=890&amp;h=311" alt="" />
@@ -133,7 +133,7 @@ LDES continues by then positioning that, if multiple views must become possible,
       <p>In this paper, we look into making these event sources and derived Web APIs evolvable and preservable, and mitigate the four limitations mentioned above.
 Even when a service or dataset is decommissioned, user agents that were once built on top of it, will still be able to resolve queries against archived data.
 In <a href="#results">Section 3</a>, we sketch our first steps into designing the TREE specification for guiding user agents through a fragmented dataset.
-In <a href="#method">Section 4</a>, We then show using a couple of examples how to build what we will call <em>materializable</em> Web APIs.
+In <a href="#method">Section 4</a>, we then show using a couple of examples how to build what we will call <em>materializable</em> Web APIs.
 Finally, in <a href="#conclusion">the Conclusion</a>, we reiterate the limitations and discuss how these materializable Web APIs tackle them.</p>
 
     </div>
@@ -144,7 +144,7 @@ Finally, in <a href="#conclusion">the Conclusion</a>, we reiterate the limitatio
       <h2 property="schema:name">State of the art</h2>
 
       <p>Hartig et al. looked into Link Traversal Query Processing by following the HTTP identifiers it encounters in the triples of Linked Data documents <span class="references">[<a href="#ref-3">3</a>]</span>.
-While this works, as also implemented <a href="https://comunica.dev/research/link_traversal/">in Comunica</a> <span class="references">[<a href="#ref-4">4</a>]</span>, it goes too slow for live Web applications in practise, as these data interfaces are not optimized for querying.
+While this works, as also implemented <a href="https://comunica.dev/research/link_traversal/">in Comunica</a> <span class="references">[<a href="#ref-4">4</a>]</span>, it goes too slow for live Web applications in practice, as these data interfaces are not optimized for querying.
 In our work, we will look into more directed link traversal, by making the data publishing include explicit hypermedia controls into their results.</p>
 
       <!--
@@ -166,7 +166,7 @@ The resource structure proposed by Triple Pattern Fragments. The page will retur
 -->
 
       <p>Hydra <span class="references">[<a href="#ref-5">5</a>]</span> is a domain model introduced in 2013 to bring the power of hypermedia to Linked Data based APIs.
-Other work outside the Linked Data domain, such a <a href="https://apigility.org/documentation/api-primer/halprimer">Hypertext Application Layer (HAL)</a> and <a href="https://jsonapi.org/">json:api</a>, introduced hypermedia specifications to Web APIs already before.
+Other work outside the Linked Data domain, such a <a href="https://apigility.org/documentation/api-primer/halprimer">Hypertext Application Layer (HAL)</a> and <a href="https://jsonapi.org/">json:api</a>, also introduced hypermedia specifications to Web APIs.
 In all three of these cases, the hypermedia controls that would afford pruning a client’s search space are limited.
 For instance, the nearest concept to the concept of a fragmentation strategy in <a href="http://www.hydra-cg.com/spec/latest/core/">Hydra</a> is the concept of a <a href="http://www.hydra-cg.com/spec/latest/core/#collections">partial collection view</a>.
 This view describes how to get to the first, next, previous or last page.
@@ -174,7 +174,7 @@ Yet, no description is provided on whether or not the view is ordered, and thus,
 
       <p>Another specification that includes hypermedia controls as part of a broaded protocols is <a href="https://www.w3.org/TR/activitystreams-core/">Activity Streams 2.0</a>.
 This specification does allow to indicate pages are ordered, yet the description of the ordering itself is left out of scope.
-<a href="https://www.w3.org/TR/ldp/">Linked Data Platform (LDP)</a> is a World Wide Web (W3C) specification that also puts forward a pagination specification.
+<a href="https://www.w3.org/TR/ldp/">Linked Data Platform (LDP)</a> is a World Wide Web (W3C) specification that in an extension also puts forward a <a href="https://www.w3.org/TR/ldp-paging/">paging specification</a>.
 <a property="schema:citation http://purl.org/spar/cito/cites" href="https://pdfs.semanticscholar.org/4e77/37fff638f89260286d5dbe1a1adf0fc17cc7.pdf">Despite its conflicts with Hydra and Activity Streams 2.0</a> <span class="references">[<a href="#ref-6">6</a>]</span>, it does put forward a way to describe how a collection is ordered.
 It is the only example in the state of the art we found so far that could allow clients to effectively prune their search space to some extent. We did however not find any evidence of clients taking advantage of this specific feature.</p>
 
@@ -236,7 +236,7 @@ This is explored in the next subsection on traversing the hypermedia structure.<
       <p>We always write TREE with all caps to indicate we take inspiration from traversing search trees, but we cannot guarantee, and do not limit the TREE hypermedia specification to designing search trees.
 Even however we would limit it to search trees, counting on the fact that server would not provide you circular references would be incredibly naive.
 Therefore, a TREE user agent must always keep a history of nodes it already traversed, and <em>prune</em> these nodes from its yet-to-be-visited queue.
-Visited nodes may be readded to the queue if the user agent implements a cache invalidation strategy.</p>
+Visited nodes may be added again to the queue if the user agent implements a cache invalidation strategy.</p>
 
       <p>The <code>tree:Node</code> describing the current page is linked with the property <code>tree:relation</code> to an entity that is an instance of a subclass of a <code>tree:Relation</code>.
 For example, for string search, we have defined the type <code>tree:SubstringRelation</code>.
