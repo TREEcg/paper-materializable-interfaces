@@ -273,7 +273,7 @@ These use cases describe their search space \texttt{tree:Relation} objects.
 A one dimensional pagination of an ever-growing collection of immutable events has interesting caching properties.
 Only one page remains to be polled, while all other pages are historic and can be flagged with the \texttt{cache-control: immutable} response header.
 In ~\cite{lonneville2021publishing} this is applied on Marine Regions: a gazetteer of standard marine georeference place names and areas. While different organizations build different views on it, all views only need to poll the last page to keep their views in-sync.
-In ~\cite{ldes} it is applied on top of both base registries of the Flemish government, as well as a sensor observation stream, proving the method is both useful for
+In ~\cite{ldes} it is applied on top of both base registries of the Flemish government, as well as a sensor observation stream, proving the method is both useful for fast and slow changing data publishing.
 In ~\cite{van2022publishing} it is applied to keep the data from art collections from the city of Ghent in-sync with their digital asset management system and the city’s SPARQL endpoint, through which the history and the current state of the art collections can be queried.
 In a similar way, for more fine-grained access to specific windows in time, a B+-tree like fragmentation can also be designed.
  \item[2. Time-based relations for route planning over public transit networks]
